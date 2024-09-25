@@ -65,26 +65,40 @@ To get started using Basic Moderation Tools 2.0, start by downloading the source
 
 To get started creating custom commands, open up the config script and go to the very bottom of the module script where it says 'CustomCommands'. You will see an example command that you'll be able to execute. When you execute the command in-game, you should see in the console, it printed 'You fired an owner-only custom command'!
 
-1. To create a custom command, copy and paste the example custom commands structure. If you don't have the command structure, you can copy the code from the 'CustomCommandConfig' file.
-2. Edit the commands config:
-  Name: The name that you want to use to execute the command.
-  Enabled: Is the command enabled?
-  Allowed: Who's allowed to execute the command? (Note: If you pick a role e.g. Administrator, all the roles above Administrator (Superadmin, Owner) will be able to use the command.
-  NotifyStaff: Do you want to notify staff whenever the command is executed?
-  LogInConsole: Do you want to log the command execution in the console?
-  ScriptToExecute: The script that you want to execute whenever the custom command is executed, the custom command script must be located in Basic Moderation Tools 2.0 > Custom Scripts for BMT to be able     to execute.
-3. Navigate to Basic Moderation Tools 2.4 > Custom Scripts and create a new module script, name it what you put in the 'ScriptToExecute' area of the config. In the script, you will need to paste in the       template, located in the files section named 'ScriptExecuteTemplate.
-4. Edit the function to do what you want the custom command to do. If you want to use the BMT2.4 API in your custom command, a full documentation is available in the api file. You can also rename the          variable custom to whatever you like, just ensure that all the variables are changed to the updated name. (Important: Please do not change the :Run() function to anything else, as this is what the          CustomCommand API uses to execute the script) (Note: Variables are currently not available in the CustomCommand API, this will be released sometime in the future.
-5. Your custom command is completed! Try running it in-game to try it out!
+To create a custom command, paste in this command structure under the sample custom command and edit the following parameters to be what you would like:
+```lua
+{
+Name = "exmaplecommand"; -- The command name you want to use to execute
+Enabled = true; -- Is the command enabled
+Allowed = "Owner"; -- Who is allowed to use the command (Heirachy)
+NotifyStaff = false; -- Notify staff of the command execution
+LogInConsole = true; -- Log the command execution in the console
+ScriptToExecute = "CustomExecutionScript"; -- The script you want the custom command API to execute. The file to execute must be located in Custom Scripts
+};
+```
+After that, navigate to ```Basic Moderation Tools 2.4 > Custom Scripts``` and create a new module script, name it what you put in the ```ScriptToExecute``` area of the custom command configuration.
 
-# Using the BMTv3 API
+In the module script, paste in this template to get you started, you will need to edit the script inside the function for what you would like your custom command to do, an example that's already there is the print statement that fires whenever you execute the custom commmand:
+```lua
+local bmtExecute = {}
 
-BMT2.4 comes with an API that your custom scripts can use simply by loading the API module.
+function bmtExecute:Run()
+  print("Hello World")
+  -- What the custom command should do
+end
+
+return bmtExecute
+```
+That's it! You've successfully created a custom command using the CustomCommands API!
+
+# Using APIv3 inside Custom Scripts
+
+Do you want to be able to use BMT2.4's API to execute it's commands? BMT2.4 comes with an API that your custom scripts can use simply by loading the API module.
 You can load APIv3 with this line of code:
 ```lua
 local bmtAPI = require(game.ServerScriptService["Basic Moderation Tools 2.0"]["BasicMod Scripts"]["BasicMod V3 API"])
 ```
-After loading the API, you can use these functions to execute various BMT2.4 commands in a script:
+After loading the API, you can use these functions to execute various BMT2.4 commands in any script you want:
 ```lua
 :WhitelistCheck(plr) -- Checks if a player is in the whitelist table
 :GetAdminLevel(plr) -- Returns the admin level of a player (Moderator, Administrator, etc .. )

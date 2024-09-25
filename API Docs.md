@@ -42,17 +42,59 @@
 
 BMT2.4 comes with an API that your custom scripts can use simply by loading the API module.
 You can load APIv3 with this line of code:
-```
+```lua
 local bmtAPI = require(game.ServerScriptService["Basic Moderation Tools 2.0"]["BasicMod Scripts"]["BasicMod V3 API"])
 ```
 
 # API Docs
-
-1. :WhitelistCheck(plr) - Checks if a player is in the whitelist table
-2. :GetAdminLevel(plr) - Returns the admin level of a player (Moderator, Administrator, etc .. )
-3. :GetAdminType(plr) - Returns the admin level number of a player (1, 2, 3, etc .. )
-4. :GetGameOwner(plr) - Returns true or false on if a player is the game owner
-5. :BlacklistCheck(plr) - Checks whether a player is blacklisted and kicks them and notifies staff if so
-6. :Kick(plr, reason, admin) - Kicks a player with the kick message displaying the reason, admin, and an optional reason
-7. :ConsoleLog(message) - Logs a message in the console using BasicMod watermarks
-8. :NotifyStaff(message) - Notifies Moderator+ in the game using an announcement (Note: You will need to compile the message you send as this feature only       takes in one variable
+```lua
+:WhitelistCheck(plr) -- Checks if a player is in the whitelist table
+:GetAdminLevel(plr) -- Returns the admin level of a player (Moderator, Administrator, etc .. )
+:GetAdminType(plr) -- Returns the admin level number of a player (1, 2, 3, etc .. )
+:GetGameOwner(plr) -- Returns true or false on if a player is the game owner
+:BlacklistCheck(plr) -- Checks whether a player is blacklisted and kicks them and notifies staff if so
+:Kick(plr, reason, admin) -- Kicks a player with the kick message displaying the reason, admin, and an optional reason
+:ConsoleLog(message) -- Logs a message in the console using BasicMod watermarks
+:NotifyStaff(message) -- Notifies Moderator+ in the game using an announcement (Note: You will need to compile the message you send as this feature only       takes in one variable
+:IsTargetInGame(target) -- Returns a boolean of whether a specified player is in the game
+:Reset(plr) -- Resets a player
+:Refresh(plr) -- Refreshes a player
+:Speed(plr, amount) -- Gives a player walkspeed using the amount variable
+:Teleport(target, destination) -- Teleports a player (target) to another player (destination)
+:ForceField(plr) -- Gives a player an forcefield
+:UnForceField() -- Removes a players forcefield
+:Message(plr, message, amount) -- Announces a message to the server, plr: The admin name, message: The message to display, amount: How long the message is displayed on the screen
+:PMessage(plr, admin, message, amount) -- Announces a message to a specified player (plr), the parameters are the same as :Message()
+:PSMessage(plr, admin, message, amount) -- Announces a server message to a specified player. Leave admin as 'Server', the parameters are the same as :Message()
+:Hint(admin, message, amount) -- Hints a message to the server, parameters are the same as :Message()
+:PHint(plr, admin, message, amount) -- Hints a message to a specified player, parameters are the same as :Message()
+:PSHint(plr, admin, message, amount) -- Server Hints a message to a specified player, parameters are the same as :PSMessage()
+:Sit(plr) -- Sits a player
+:Unsit(plr) -- Unsits a player
+:Jump(plr) -- Makes a player jump
+:Freeze(plr) -- Freezes a player
+:Unfreeze(plr) -- Unfreezes a player
+:Shutdown(admin, reason) -- Shuts down the server with a admin and reason parameter (The admin parameter can be anything)
+:Slock(admin, reason) -- Slocks the server
+:Unslock() -- Unslocks the server
+:IsSlocked() -- Returns a boolean value of whether the server is slocked or not
+:CheckSlock(plr) -- Checks if the server is slocked, if so the given player parameter will be kicked from the server (MainModule use)
+:Pin(admin, message) -- Pins a message to the top of the screen for all players in the server
+:Clear() -- Clears all pinned messages
+:Mute(plr, reason, admin) -- Mutes a player, displays a message to the target showing the reason and the admin
+:Unmute(plr, admin) -- Unmutes a player, showing the admin in a :PMessage()
+:Blur(plr) -- Blurs a players screen
+:Unblur(plr) -- Unblurs a players screen
+:God(plr) -- Makes a players health math.huge()
+:Ungod(plr) -- Makes the players health go to the default 100
+:Invisible(plr) -- Makes a players avatar invisible
+:Visible(plr) -- Makes a players avatar visible
+:Headless(plr) -- Gives headless to a player
+:Unheadless(plr) -- Removes the headless effect on a player
+:Korblox(plr) -- Gives korblox to a player
+:Unkorblox(plr) -- Removes the korblox effect on a player
+:Ban(name, reason, banDate, mdoerator) -- Bans a player from the server, kick message showing: Reason, Admin, and the bandate
+:Unban(plr) -- Unbans a player from the server
+:IsBanned(plr) -- Returns a boolean of whether the specified player is banned from the server
+:CheckBan(plr) -- Checks if a player is banned, if so than they are kicked from the server
+```

@@ -1,71 +1,77 @@
-# Introduction to Basic Moderation Tools 2.4
+# Introduction
 
-Basic Moderation Tools is a fully open source admin module I built from the ground up, containing more than 30 commands to help you moderate your player base. It allows for creating custom commands, being able to interface with our simple API to simplify your scripts for different types of commands. Please note that BasicModTools has alot of bugs that I will try my best to remove. It will remain open-source for now until I crack down on all the bugs and release all the good features an admin module would need.
+Basic Moderation Tools (2.4) is a fully open source admin module, currently containing 38 executable in-game commands. It features admin heirachies, Custom Command Integration, Flexible Command Configuration, Donor Commands, Command Logging, and a API (APIv3) that can be loaded in a custom script and use all of Basic Moderation Tools' functions.
 
-# Important!
+```
+Some features haven't been officially released yet due to bugs:
 
-Some features in BMT2.4 havent been released yet due to the amount of time I have to make BMT2.4, these features will be released later when I have enough time. The features that havent been released yet are listed below:
-- NotifyStaff
-- Logs, Chatlogs, Banlogs (UI)
-- BanAPI (Currently working on integrating it with Roblox's new api for banning)
+- :NotifyStaff()
+- Server ban API
+- Logs, Chatlogs
+```
+# Getting Started
 
-# Installing BMT2.4
+To install BMT2.4, navigate to ``basicmod > Basic Moderation Tools 2.4.rbxm`` and download the module. In Roblox Studio import the module by right clicking on the ``Explorer`` and pressing ``Insert from file``
 
-To get started using Basic Moderation Tools 2.0, start by downloading the source code in the files section, named BasicModerationTools2.4. You will need to update a couple of settings before using the admin module.
+You will need to ungroup the model and move all the folders to their respective positions, shown below:
+```
+3.0 ReplicatedStorage > Replicated Storage
+3.0 SoundService > Sound Service
+3.0 StarterGui > StarterGui
+3.0 Blur > Lighting
+Basic Moderation Tools 2.0 > ServerScriptService
+```
+Open ``Basic Moderation Tools 2.0`` and configure the admin module settings to your liking.
 
-# How to Setup BMT2.4
-
-1. To get started, you will need to import the module by right clicking on the explorer and inserting BMT2.4 in.
-2. Ungroup the folder '(Ungroup) Basic Moderation Tools 2.4 in ServerScriptService.
-3. Drag all the folders into their respective locations, indicated by the folder name. Keep the module script in ServerScriptService (Important: Do not change the folder names if you don't know what your doing!)
-4. Open up 'Basic Moderation Tools 2.0' (Module Script) and insure all the settings you want for your game are correct. This is important for command customization. (Note: You are automatically given the owner rank as the owner of the game, you do not need to add yourself into the admin table)
-5. Join the game and BMT2.4 will load and start up.
+> Note: You do not need to enter your username into the admin table, as the game owner is automatically ranked upon joining the game
 
 # Commands
-1. res (plr/me/others/all) - Resets a players avatar
-2. ref (plr/me/others/all) - Refreshes a players avatar
-3. speed (plr/me/others/all) (amount) - Gives a player a specified amount of walkspeed
-4. tp (plr/me/all) (plr/me/all) - Teleports a player(s) to another player(s)
-5. to (plr) - Teleports the executor to a player
-6. bring (plr/all) - Teleports a player(s) to the executor
-7. kick (plr/others/all) (reason) - Kicks a player(s) with a optional reason
-8. ff (plr/me/others/all) - Gives a forcefield to a player(s)
-9. unff (plr/me/others/all) - Removes a player(s) forcefield
-10. m (message) - Announces a message to the entire server
-11. sm (message) - Announces a server message to the entire server
-12. h (message) - Hints a message to the entire server
-13. sh (message) - Server Hints a message to the entire server
-14. sit (plr/me/others/all) - Sits a player(s)
-15. unsit (plr/me/others/all) - Unsits a player(s)
-16. jump (plr/me/others/all) - Makes a player(s) jump
-17. freeze (plr/me/others/all) - Freezes a player(s)
-18. unfreeze (plr/me/others/all) - Unfreezes a player(s)
-19. shutdown (reason) - Kicks all players with a optional reason
-20. slock (reason) - Locks the server so new users cannot join, displays a server message to announce the change
-21. unslock (reason) - Unlocks the server so new users can join, displays a server message to announce the change
-22. pin (message) - Pins a message to the top the screen for all users that are in the game
-23. clr - Cleans all pins
-24. sp - Pins a server message to the top the screen for all users that are in the game
-25. mute (plr/others) (reason) - Mutes a player(s) chat so they are unable to chat in-game
-26. unmute (plr/others) - Unmutes a player(s) so they are able to chat in-game
-27. blur (plr/me/others/all) - Blur's a player(s) screen
-28. unblur (plr/me/others/all) - Unblur's a player(s) screen
-29. god (plr/me/others/all) - Makes a player(s) health to math.huge()
-30. ungod (plr/me/others/all) - Makes a player(s) health return to 100
-31. invis (plr/me/others/all) - Makes a player(s) avatar invisible
-32. vis (plr/me/others/all) - Makes a player(s) avatar visible
-33. headless (me) - Makes a player(s) head invisible
-34. unheadless (me) - Makes a player(s) head visible
-35. korblox (me) - Makes a player(s) right leg invisible
-36. unkorblox (me) - Makes a player(s) right leg visible
-37. ban (plr) (reason) - Bans a player from the server with a reason displayed in the kick message
-38. unban (plr) - Unbans a player from the server
+```
+res (plr/me/others/all) - Resets a player's avatar
+ref (plr/me/others/all) - Refreshes a player's avatar
+speed (plr/me/others/all) (amount) - Gives a player a specified amount of walkspeed
+tp (plr/me/all) (plr/me/all) - Teleports a player(s) to another player(s)
+to (plr) - Teleports the executor to a player
+bring (plr/all) - Teleports a player(s) to the executor
+kick (plr/others/all) (reason) - Kicks a player(s) with an optional reason
+ff (plr/me/others/all) - Gives a forcefield to a player(s)
+unff (plr/me/others/all) - Removes a player(s) forcefield
+m (message) - Announces a message to the entire server
+sm (message) - Announces a server message to the entire server
+h (message) - Hints a message to the entire server
+sh (message) - Server Hints a message to the entire server
+sit (plr/me/others/all) - Sits a player(s)
+unsit (plr/me/others/all) - Unsits a player(s)
+jump (plr/me/others/all) - Makes a player(s) jump
+freeze (plr/me/others/all) - Freezes a player(s)
+unfreeze (plr/me/others/all) - Unfreezes a player(s)
+shutdown (reason) - Kicks all players with an optional reason
+slock (reason) - Locks the server so new users cannot join, displays a server message to announce the change
+unslock (reason) - Unlocks the server so new users can join, displays a server message to announce the change
+pin (message) - Pins a message to the top of the screen for all users in the game
+clr - Cleans all pins
+sp - Pins a server message to the top of the screen for all users in the game
+mute (plr/others) (reason) - Mutes a player(s) so they cannot chat in-game
+unmute (plr/others) - Unmutes a player(s) so they can chat in-game
+blur (plr/me/others/all) - Blurs a player(s) screen
+unblur (plr/me/others/all) - Unblurs a player(s) screen
+god (plr/me/others/all) - Makes a player(s) health infinite
+ungod (plr/me/others/all) - Resets a player(s) health to 100
+invis (plr/me/others/all) - Makes a player(s) avatar invisible
+vis (plr/me/others/all) - Makes a player(s) avatar visible
+headless (me) - Makes a player(s) head invisible
+unheadless (me) - Makes a player(s) head visible
+korblox (me) - Makes a player(s) right leg invisible
+unkorblox (me) - Makes a player(s) right leg visible
+ban (plr) (reason) - Bans a player from the server with a reason displayed in the kick message
+unban (plr) - Unbans a player from the server
+```
 
 # Custom Commands
 
-To get started creating custom commands, open up the config script and go to the very bottom of the module script where it says 'CustomCommands'. You will see an example command that you'll be able to execute. When you execute the command in-game, you should see in the console, it printed 'You fired an owner-only custom command'!
+To get started creating a custom command, open up ``Basic Moderation Tools 2.0`` and scroll to the bottom, where it says ``CustomCommands``.
 
-To create a custom command, paste in this command structure under the sample custom command and edit the following parameters to be what you would like:
+Paste in under the example command this template:
 ```lua
 {
 Name = "exmaplecommand"; -- The command name you want to use to execute

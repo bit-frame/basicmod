@@ -156,3 +156,13 @@ After loading the API, you can use these functions to execute various BMT2.4 com
 :IsBanned(plr) -- Returns a boolean of whether the specified player is banned from the server
 :CheckBan(plr) -- Checks if a player is banned, if so than they are kicked from the server
 ```
+
+Here's an example using APIv3 in a custom script. Whenever a player joins the game, it gives them a forcefield and prints that a new player has joined the game:
+```lua
+local bmtAPI = require(game.ServerScriptService["Basic Moderation Tools 2.0"]["BasicMod Scripts"]["BasicMod V3 API"])
+
+game.Players.PlayerAdded:Connect(function(plr)
+	bmtAPI:ForceField(plr)
+	bmtAPI:ConsoleLog("A player has joined the game")
+end)
+```

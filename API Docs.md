@@ -37,3 +37,22 @@
 36. unkorblox (me) - Makes a player(s) right leg visible
 37. ban (plr) (reason) - Bans a player from the server with a reason displayed in the kick message
 38. unban (plr) - Unbans a player from the server
+
+# Loading the BMTv3 API
+
+BMT2.4 comes with an API that your custom scripts can use simply by loading the API module.
+You can load APIv3 with this line of code:
+```
+local bmtAPI = require(game.ServerScriptService["Basic Moderation Tools 2.0"]["BasicMod Scripts"]["BasicMod V3 API"])
+```
+
+# API Docs
+
+1. :WhitelistCheck(plr) - Checks if a player is in the whitelist table
+2. :GetAdminLevel(plr) - Returns the admin level of a player (Moderator, Administrator, etc .. )
+3. :GetAdminType(plr) - Returns the admin level number of a player (1, 2, 3, etc .. )
+4. :GetGameOwner(plr) - Returns true or false on if a player is the game owner
+5. :BlacklistCheck(plr) - Checks whether a player is blacklisted and kicks them and notifies staff if so
+6. :Kick(plr, reason, admin) - Kicks a player with the kick message displaying the reason, admin, and an optional reason
+7. :ConsoleLog(message) - Logs a message in the console using BasicMod watermarks
+8. :NotifyStaff(message) - Notifies Moderator+ in the game using an announcement (Note: You will need to compile the message you send as this feature only       takes in one variable

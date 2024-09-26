@@ -234,4 +234,4 @@ That's it! You have read through all of BMT2.4's documentation. Once new feature
 
 Thanks for reading!
 
-81Frames, Developer of BMT
+**81Frames, Developer of BMT**

@@ -166,12 +166,10 @@ game.Players.PlayerAdded:Connect(function(plr)
     bmtAPI:ConsoleLog("A player has joined the game")
 end)
 ```
-# Example Usages of APIv3
+# Example Usage: Training Center Announcement Messages
+
 There are many use cases for APIv3, like in a training center, where you can create different evetns that occur from the press of a button or command in chat. Below is an example of an announcement tutorial for players that are in the lobby waiting to be training. The announcement shows crucial information for the training, after that it resets all the players (You could change this part to TP players to a Moderator for the training).
-
-# Example 1: Training Center Announcement Messages
-
-To use this example, you will need to set up this custom example. Below is the tutorial:
+Below is the tutorial for this example:
 
 Navigate to ``Basic Moderation Tools 2.0`` (Configuration Script) and paste this into ``CustomCommands``:
 ```lua

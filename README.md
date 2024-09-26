@@ -74,12 +74,12 @@ To get started creating a custom command, open up ``Basic Moderation Tools 2.0``
 Paste in under the example command this template:
 ```lua
 {
-Name = "exmaplecommand"; -- The command name you want to use to execute
-Enabled = true; -- Is the command enabled
-Allowed = "Owner"; -- Who is allowed to use the command (Heirachy)
-NotifyStaff = false; -- Notify staff of the command execution
-LogInConsole = true; -- Log the command execution in the console
-ScriptToExecute = "CustomExecutionScript"; -- The script you want the custom command API to execute. The file to execute must be located in Custom Scripts
+    Name = "exmaplecommand"; -- The command name you want to use to execute
+    Enabled = true; -- Is the command enabled
+    Allowed = "Owner"; -- Who is allowed to use the command (Heirachy)
+    NotifyStaff = false; -- Notify staff of the command execution
+    LogInConsole = true; -- Log the command execution in the console
+    ScriptToExecute = "CustomExecutionScript"; -- The script you want the custom command API to execute. The file to execute must be located in Custom Scripts
 };
 ```
 After that, navigate to ```Basic Moderation Tools 2.4 > Custom Scripts``` and create a new module script, name it what you put in the ```ScriptToExecute``` area of the custom command configuration.
@@ -162,7 +162,57 @@ Here's an example using APIv3 in a custom script. Whenever a player joins the ga
 local bmtAPI = require(game.ServerScriptService["Basic Moderation Tools 2.0"]["BasicMod Scripts"]["BasicMod V3 API"])
 
 game.Players.PlayerAdded:Connect(function(plr)
-	bmtAPI:ForceField(plr)
-	bmtAPI:ConsoleLog("A player has joined the game")
+    bmtAPI:ForceField(plr)
+    bmtAPI:ConsoleLog("A player has joined the game")
 end)
 ```
+# Example Usages of APIv3
+There are many use cases for APIv3, like in a training center, where you can create different evetns that occur from the press of a button or command in chat. Below is an example of an announcement tutorial for players that are in the lobby waiting to be training. The announcement shows crucial information for the training, after that it resets all the players (You could change this part to TP players to a Moderator for the training).
+
+# Example 1: Training Center Announcement Messages
+
+To use this example, you will need to set up this custom example. Below is the tutorial:
+
+Navigate to ``Basic Moderation Tools 2.0`` (Configuration Script) and paste this into ``CustomCommands``:
+```lua
+{
+    Name = "start"; -- Execute in-chat using :start
+    Enabled = true;
+    Allowed = "Administrator";
+    NotifyStaff = true;
+    LogInConsole = true;
+    ScriptToExecute = "StartAnnouncementTutorial";
+};
+```
+Navigate to ``Basic Moderation Tools 2.0 > Custom Scripts`` and create a new ``Module Script`` and name it ``StartAnnouncementTutorial``, or what you named it in the ``ScriptToExecute`` area of the configuration:
+```lua
+local bmtAPI = require(game.ServerScriptService["Basic Moderation Tools 2.0"]["BasicMod Scripts"]["BasicMod V3 API"])
+
+local bmtExecute = {}
+
+local permitted = true
+
+function bmtExecute:Run()
+    if permitted == true then
+        permitted = false
+        bmtAPI:ConsoleLog("The announcement tutorial is starting for all players!")
+        bmtAPI:Message("Training Center", "Welcome to the training. This announcement will show important information about the training, please pay attention", 15)
+        wait(16)
+        bmtAPI:Message("Training Center", "This is some information", 10)
+        wait(11)
+        bmtAPI:Message("Training Center", "This is some more information", 10)
+        wait(11)
+        bmtAPI:Message("Training Center", "Good luck! You will be reset soon...", 10)
+        wait(11)
+        for _, player in ipairs(game.Players:GetPlayers()) do
+            bmtAPI:Reset(player)
+        end
+        bmtAPI:ConsoleLog("The Announcement Tutorial (Custom Command) has completed running, the command will not be permitted to run again in this server.")
+    else
+        bmtAPI:ConsoleLog("An admin attempted to rerun the Announcement Tutorial command again. It has already been executed in this server.")
+    end
+end
+
+return bmtExecute
+```
+That's it! Try running the command in-game by typing ``:start`` into the chatbar and you should see an announcement UI pop up.

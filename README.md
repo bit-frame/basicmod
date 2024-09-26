@@ -125,6 +125,7 @@ After loading the API, you can use these functions to execute various BMT2.4 com
 :PMessage(plr, admin, message, amount) -- Announces a message to a specified player (plr), the parameters are the same as :Message()
 :PSMessage(plr, admin, message, amount) -- Announces a server message to a specified player. Leave admin as 'Server', the parameters are the same as :Message()
 :Hint(admin, message, amount) -- Hints a message to the server, parameters are the same as :Message()
+:SHint(admin, message, amount) -- Server Hints a message to the server, parameters are the same as :Message()
 :PHint(plr, admin, message, amount) -- Hints a message to a specified player, parameters are the same as :Message()
 :PSHint(plr, admin, message, amount) -- Server Hints a message to a specified player, parameters are the same as :PSMessage()
 :Sit(plr) -- Sits a player
@@ -168,7 +169,8 @@ end)
 ```
 # Example Usage: Training Center Announcement Messages
 
-There are many use cases for APIv3, like in a training center, where you can create different evetns that occur from the press of a button or command in chat. Below is an example of an announcement tutorial for players that are in the lobby waiting to be training. The announcement shows crucial information for the training, after that it resets all the players (You could change this part to TP players to a Moderator for the training).
+There are many use cases for APIv3, like in a training center, where you can create different evetns that occur from the press of a button or command in chat. Below is an example of an announcement tutorial for players that are in the lobby waiting to be training. The announcement shows crucial information for the training, after that it resets all the players (You could change this part to TP players to a Moderator for the training). After the announcement has played, the script automatically locks the server so new people cannot join.
+
 Below is the tutorial for this example:
 
 Navigate to ``Basic Moderation Tools 2.0`` (Configuration Script) and paste this into ``CustomCommands``:
@@ -193,6 +195,8 @@ local permitted = true
 function bmtExecute:Run()
     if permitted == true then
         permitted = false
+        bmtAPI:Slock("Training Center", "The training has started! New players will not be able to join.")
+        bmtAPI:SHint("Training Center", "The server is now locked due to: Training has started.", 5)
         bmtAPI:ConsoleLog("The announcement tutorial is starting for all players!")
         bmtAPI:Message("Training Center", "Welcome to the training. This announcement will show important information about the training, please pay attention", 15)
         wait(16)
@@ -212,5 +216,22 @@ function bmtExecute:Run()
 end
 
 return bmtExecute
+
 ```
 That's it! Try running the command in-game by typing ``:start`` into the chatbar and you should see an announcement UI pop up.
+
+# Adding more
+
+There is already so much potential for this example usage of the API. You could use the ``:Sit()`` function so that all players are sitting when the announcement is played. You could use the ``:Freeze()`` function so players cannot move, and much more..
+
+# What's next for 2.4?
+
+There is so much more that I plan to add to Basic Moderation Tools that I don't have time for right now, including: A online web interface so admins and superadmins can check up on the game online, webhooks, including Roblox's new ban API, and more customizability for BMT! I made BMT for newer developers that are wanting a simple admin module that they can fork and modify to their liking, simplifying their process for creating custom commands.
+
+# Conclusion
+
+That's it! You have read through all of BMT2.4's documentation. Once new features are added I will be adding on to this doc.
+
+Thanks for reading!
+
+81Frames, Developer of BMT

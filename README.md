@@ -6,7 +6,6 @@ Basic Moderation Tools (2.4) is a fully open source admin module, currently cont
 Some features haven't been officially released yet due to bugs:
 
 - :NotifyStaff()
-- Server ban API
 - Logs, Chatlogs
 ```
 # Getting Started

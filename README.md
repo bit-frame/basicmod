@@ -62,7 +62,8 @@ headless (me) - Makes a player(s) head invisible
 unheadless (me) - Makes a player(s) head visible
 korblox (me) - Makes a player(s) right leg invisible
 unkorblox (me) - Makes a player(s) right leg visible
-ban (plr) (reason) - Bans a player from the server with a reason displayed in the kick message
+ban (plr) (time: days) (reason) - Bans a player from the server with a reason displayed in the kick message
+pban (plr) (reason) - PBans a player from the server with a reason displayed in the kick message
 unban (plr) - Unbans a player from the server
 ```
 

@@ -152,10 +152,10 @@ After loading the API, you can use these functions to execute various BMT2.4 com
 :Unheadless(plr) -- Removes the headless effect on a player
 :Korblox(plr) -- Gives korblox to a player
 :Unkorblox(plr) -- Removes the korblox effect on a player
-:Ban(name, reason, banDate, mdoerator) -- Bans a player from the server, kick message showing: Reason, Admin, and the bandate
-:Unban(plr) -- Unbans a player from the server
-:IsBanned(plr) -- Returns a boolean of whether the specified player is banned from the server
-:CheckBan(plr) -- Checks if a player is banned, if so than they are kicked from the server
+:Ban(username, reason, excludeAltAccounts, applyToUniverse, banDuration) -- Uses the Roblox Ban API to ban the player from the game for a set amount of time with a reason
+:PBan(username, reason, excludeAltAccounts, applyToUniverse) -- Uses the Roblox Ban API to pban the player from the game with a reason
+:IsBanned(username) -- Checks if a user is banned from the game (Roblox BanAPI)
+:Unban(username, applyToUniverse) -- Unbans the player from the game using the Roblox Ban API, optional applyToUniverse variable - Set to True for default
 ```
 
 Here's an example using APIv3 in a custom script. Whenever a player joins the game, it gives them a forcefield and prints that a new player has joined the game:

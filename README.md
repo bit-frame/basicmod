@@ -156,6 +156,7 @@ After loading the API, you can use these functions to execute various BMT2.4 com
 :PBan(username, reason, excludeAltAccounts, applyToUniverse) -- Uses the Roblox Ban API to pban the player from the game with a reason
 :IsBanned(username) -- Checks if a user is banned from the game (Roblox BanAPI)
 :Unban(username, applyToUniverse) -- Unbans the player from the game using the Roblox Ban API, optional applyToUniverse variable - Set to True for default
+:AssignAdminLevel(plr) -- Assigns a Admin Level to a user depending on what group rank they are in a group (For GroupAccess)
 ```
 
 Here's an example using APIv3 in a custom script. Whenever a player joins the game, it gives them a forcefield and prints that a new player has joined the game:

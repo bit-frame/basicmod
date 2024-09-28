@@ -176,8 +176,28 @@ After loading the API, you can use all of BMT's functions to execute BMT2.4 comm
 
 # APIv3: WhitelistCheck()
 
-Function: ``WhitelistCheck(plr)`` <br>
+> This function is being deprecated in favour of ``:IsWhitelisted()``
+
+Function: ``:WhitelistCheck(plr)`` <br>
 Purpose: Checks if a player is in the whitelist table, if not it kicks them from the server. This is a ``BMT MainModule Function`` and isn't really intended to be used in Custom Scripts <br>
+
+# APIv3: IsWhitelisted()
+
+Function: ``:IsWhitelisted(plr)`` <br>
+Purpose: Returns true or false if the player specified is in the whitelist table
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   if bmtAPI:IsTargetInGame(plr) then
+      if bmtAPI:IsWhitelisted(plr) then
+         print("Player is whitelisted")
+      else
+         print("Player is not whitelisted")
+      end
+   end
+end)
+```
 
 # APIv3: GetAdminLevel()
 
@@ -209,12 +229,14 @@ end)
 
 # APIv3: GetGameOwner()
 
-Function: ``:GetGameOwner(plr)``<br>
+> ``:GetGameOwner()`` will soon be replaced by ``:IsOwner()``. If you are using this function, it is recommended to make the swap. ``:IsOwner()`` works the exact same as the current function, making it possible to still use this guide on the function.
+
+Function: ``:GetGameOwner(plr)``/``:IsOwner(plr)``<br>
 Purpose: Returns true or false on if a player is the game owner
 
 ```lua
 game.Players.PlayerAdded:Connect(function(plr)
-   local isGameOwner = bmtAPI:GetGameOwner(plr)
+   local isGameOwner = bmtAPI:IsOwner(plr)
    if isGameOwner then
       print(plr.Name.." is the game owner!")
    else
@@ -275,8 +297,388 @@ end)
 
 # APIv3: IsTargetInGame()
 
+> If you are required to use this function, it is recommended to use ``:IsInGame()``
+
 Function: ``:IsTargetInGame(plr)`` <br>
-Purpose: Returns true of false if the player specified is in the game. This is a ``BMT MainModule Function`` and isn't really intended to be used in Custom Scripts
+Purpose: Returns true or false if the player specified is in the game. This is a ``BMT MainModule Function`` and isn't really intended to be used in Custom Scripts.
+
+# APIv3: IsInGame()
+
+Function: ``:IsInGame(plr)`` <br>
+Purpose: Returns true or if the player specified is in the game
+
+Example:
+```lua
+local target = "Bob"
+
+game.Players.PlayerAdded:Connect(function()
+   if bmtAPI:IsInGame(target) then
+      print(target.." is in the game")
+   else
+      print(target.." is not in the game")
+   end
+end)
+```
+
+# APIv3: Reset()
+
+Function: ``:Reset(plr)`` <br>
+Purpose: Resets the specified player
+
+Example:
+```lua
+local target = "Bob"
+
+game.Players.PlayerAdded:Connect(function(plr)
+   if plr.Name == target then
+      wait(1) -- Delay while character is loading
+      bmtAPI:Reset(plr)
+   end
+end)
+```
+
+# APIv3: Refresh()
+
+Function: ``:Refresh(plr)`` <br>
+Purpose: Refreshes the specified player
+
+Example:
+```lua
+local target = "Bob"
+
+game.Players.PlayerAdded:Connect(function(plr)
+   if plr.Name == target then
+      wait(1) -- Delay while character is loading
+      bmtAPI:Refresh(plr)
+   end
+end)
+```
+
+# APIv3: Speed()
+
+Function: ``:Speed(plr, amount)`` <br>
+Purpose: Gives ``amount`` of walkspeed to a specified player
+
+Example:
+```lua
+local target = "Bob"
+local amountOfSpeed = 100 -- Walkspeed 100
+
+game.Players.PlayerAdded:Connect(function(plr)
+   if plr.Name == target then
+      wait(1) -- Delay while character is loading
+      bmtAPI:Speed(plr, amountOfSpeed)
+   end
+end)
+```
+
+# APIv3: Teleport()
+
+Function: ``:Teleport(target, destination)`` <br>
+Purpose: Teleports ``target`` to ``destination``. Both the target and destination need to be valid players.
+
+Example:
+```lua
+local target = "Bob"
+local destination = "Jane"
+
+game.Players.PlayerAdded:Connect(function()
+   if bmtAPI:IsInGame(target) and bmtAPI:IsInGame(destination) then
+      bmtAPI:Teleport(target, destination)
+   end
+end)
+```
+
+# APIv3: ForceField()
+
+Function: ``:ForceField(plr)`` <br>
+Purpose: Applies a ForceField to a specified player
+
+Example:
+```lua
+local specialPlayer = "81Frames"
+
+game.Players.PlayerAdded:Connect(function(plr)
+   if plr.Name == specialPlayer then
+      wait(1) -- Delay while character is loading
+      bmtAPI:ForceField(plr)
+   end
+end)
+```
+
+# APIv3: UnForceField()
+
+Function: ``:UnForceField(plr)`` <br>
+Purpose: Removes a ForceField from a specified player
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   bmtAPI:UnForceField(plr) -- Removes default forcefield on join
+end)
+```
+
+# APIv3: Message()
+
+Function: ``:Message(sender, message, time)`` <br>
+Purpose: Send an announcement to the whole server
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   bmtAPI:Message("81Frames", "Everyone, welcome "..plr.Name.."!", 10)
+end)
+```
+
+# APIv3: SMessage()
+
+Function: ``:SMessage(message, time)`` <br>
+Purpose: Send an server announcement to the whole server
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   bmtAPI:SMessage("Everyone, welcome "..plr.Name.."!", 10)
+end)
+```
+
+# APIv3: PMessage()
+
+Function: ``:PMessage(plr, sender, message, time)`` <br>
+Purpose: Send a private announcement to a specified player
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   bmtAPI:PMessage(plr, "81Frames", "Welcome, "..plr.Name..", only you can see this message!", 10)
+end)
+```
+
+# APIv3: PSMessage()
+
+Function: ``:PSMessage(plr, message, time)`` <br>
+Purpose: Send a private server announcement to a specified player
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   bmtAPI:PSMessage(plr, "Welcome, "..plr.Name..", only you can see this server message!", 10)
+end)
+```
+
+# APIv3: Hint()
+
+Function: ``:Hint(sender, message, time)`` <br>
+Purpose: Send a hint to the whole server
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   bmtAPI:Hint("81Frames", "Everyone, welcome "..plr.Name.."!", 5)
+end)
+```
+
+# APIv3: SHint()
+
+Function: ``:SHint(message, time)`` <br>
+Purpose: Send a server hint to the whole server
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   bmtAPI:SHint("Everyone, welcome "..plr.Name.."!", 5)
+end)
+```
+
+# APIv3: PHint()
+
+Function: ``:PHint(sender, message, time)`` <br>
+Purpose: Send a private hint to a specified player
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   bmtAPI:PHint("Welcome, "..plr.Name..", only you can see this private message!", 5)
+end)
+```
+
+# APIv3: PSHint()
+
+Function: ``:SHint(message, time)`` <br>
+Purpose: Send a private server hint to a specified player
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   bmtAPI:PSHint("Welcome, "..plr.Name..", only you can see this private server message!", 5)
+end)
+```
+
+# APIv3: Sit()
+
+Function: ``:Sit(plr)`` <br>
+Purpose: Make a specified player sit
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   plr.Chatted:Connect(function()
+      bmtAPI:Sit(plr)
+   end)
+end)
+```
+
+# APIv3: Unsit()
+
+Function: ``:Unsit(plr)`` <br>
+Purpose: Makes a specified player stand up (unsit)
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   plr.Chatted:Connect(function()
+      bmtAPI:Unsit(plr)
+   end)
+end)
+```
+
+# APIv3: Jump()
+
+Function: ``:Jump(plr)`` <br>
+Purpose: Makes a specified player jump
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   plr.Chatted:Connect(function()
+      bmtAPI:Jump(plr)
+   end)
+end)
+```
+
+# APIv3: Freeze()
+
+Function: ``:Freeze(plr)`` <br>
+Purpose: Freezes a specified player in place
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   wait(1) -- Delay while character is loading
+   bmtAPI:Freeze(plr)
+end)
+```
+
+# APIv3: Unfreeze()
+
+Function: ``:Unfreeze(plr)`` <br>
+Purpose: Unfreezes a specified player
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   wait(1) -- Delay while character is loading
+   bmtAPI:Freeze(plr)
+   wait(1)
+   bmtAPI:Unfreeze(plr)
+end)
+```
+
+# APIv3: Shutdown()
+
+Function: ``:Shutdown(admin, reason)`` <br>
+Purpose: Shutdown the server with a reason displayed in the kick message
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   plr.Chatted:Connect(function()
+      bmtAPI:Shutdown("Server", "Someone spoke in chat!")
+   end)
+end)
+```
+
+# APIv3: Slock()
+
+Function: ``:Slock(admin, reason)`` <br>
+Purpose: Locks the server with a reason
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   plr.Chatted:Connect(function()
+      bmtAPI:Hint("[The server is now locked due to]", "Someone spoke in chat!", 5)
+      bmtAPI:Slock("Server", "Someone spoke in chat!")
+   end)
+end)
+```
+
+# APIv3: Unslock()
+
+Function: ``:Unslock()`` <br>
+Purpose: Unlocks the server
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   plr.Chatted:Connect(function()
+      bmtAPI:Hint("[The server is now locked due to]", "Someone spoke in chat!", 5)
+      bmtAPI:Slock("Server", "Someone spoke in chat!")
+      wait(10)
+      bmtAPI:Hint("[The server is now unlocked]", " ", 5)
+      bmtAPI:Unslock()
+   end)
+end)
+```
+
+# APIv3: CheckSlock()
+
+> This function is being deprecated in favour of ``:IsWhitelisted()``
+
+Function: ``:CheckSlock(plr)``
+Purpose: Checks if the server is locked, if so than it kicks the specified player. This is a ``BMT MainModule Function`` and isn't really intended to be used in Custom Scripts
+
+# APIv3: IsSlocked()
+
+Function: ``:IsSlocked()`` <br>
+Purpose: Returns true or false if the server is locked or not
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   plr.Chatted:Connect(function()
+      if bmtAPI:IsSlocked() then
+         print("The server is currently locked")
+      else
+         print("The server is not currently locked")
+      end
+   end)
+end)
+```
+
+# APIv3: Clear()
+
+Function: ``:Clear()`` <br>
+Purpose: Clears all Pins
+
+Example:
+```lua
+bmtAPI:Clear()
+```
+
+# APIv3: Pin()
+
+Function: ``:Pin(admin, message)`` <br>
+Purpose: Pins a message to the top of all player screens
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   bmtAPI:Pin("Server", "Last player joined: "..plr.Name)
+end)
+```
+
+
 
 ```lua
 :WhitelistCheck(plr) -- Checks if a player is in the whitelist table

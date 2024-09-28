@@ -2,15 +2,13 @@
 
 Basic Moderation Tools (2.4) is a fully open source admin module, currently containing 38 executable in-game commands. It features admin heirachies, Custom Command Integration, Flexible Command Configuration, Donor Commands, Command Logging, and a API (APIv3) that can be loaded in a custom script and use all of Basic Moderation Tools' functions.
 
-```
-Some features haven't been officially released yet due to bugs:
-
-- :NotifyStaff()
-- Logs, Chatlogs
-```
 # Getting Started
 
-To install BMT2.4, navigate to ``basicmod > Basic Moderation Tools 2.4.rbxm`` and download the module. In Roblox Studio import the module by right clicking on the ``Explorer`` and pressing ``Insert from file``
+To install Basic Moderation Tools, find the newest version in the files section on github and download it. In Roblox Studio import the module by right clicking on the ``Explorer`` and pressing ``Insert from file``
+
+Alternative Installation Method: Get Basic Moderation Tools in the Roblox Asset Shop and insert it into roblox via the Toolbox. Download [Basic Moderation Tools](https://create.roblox.com/store/asset/84769302713927/241-Basic-Moderation-Tools?viewFromStudio=true&keyword=&searchId=f780f146-da98-41e3-a6c4-1f2006f77427) via Asset Shop.
+
+> Only stable versions of Basic Moderation Tools will be able to be downloaded from the Roblox Asset Shop, which are the versions that have been tested and contain minimal bugs. Unstable versions that have new features and may contain bugs can be found in the files section of this Repo.
 
 You will need to ungroup the model and move all the folders to their respective positions, shown below:
 ```
@@ -22,7 +20,9 @@ Basic Moderation Tools 2.0 > ServerScriptService
 ```
 Open ``Basic Moderation Tools 2.0`` and configure the admin module settings to what your game needs.
 
-> Note: You do not need to enter your username into the admin table, as the game owner is automatically ranked upon joining the game.
+> You do not need to enter your username into the admin table, as the game owner is automatically ranked upon joining the game.
+
+After configuring BMT, join the game and try out some of what BMT has to offer!
 
 # Commands
 ```

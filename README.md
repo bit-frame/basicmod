@@ -20,9 +20,9 @@ You will need to ungroup the model and move all the folders to their respective 
 3.0 Blur > Lighting
 Basic Moderation Tools 2.0 > ServerScriptService
 ```
-Open ``Basic Moderation Tools 2.0`` and configure the admin module settings to your liking.
+Open ``Basic Moderation Tools 2.0`` and configure the admin module settings to what your game needs.
 
-> Note: You do not need to enter your username into the admin table, as the game owner is automatically ranked upon joining the game
+> Note: You do not need to enter your username into the admin table, as the game owner is automatically ranked upon joining the game.
 
 # Commands
 ```

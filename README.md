@@ -67,6 +67,72 @@ pban (plr) (reason) - PBans a player from the server with a reason displayed in 
 unban (plr) - Unbans a player from the server
 ```
 
+# AutoMod
+
+Basic Moderation Tools contains a Anticheat/Mod that automatically moderates certain parts of your server. The currently available things that AutoMod can Moderate are listed below:
+
+```
+Chat Spam - When a player spams in the Roblox Chat, AutoMod can take action and execute a command chosen by the developer in the configuration script.
+Speed Exploits - When a player's walkspeed is above the default, AutoMod can execute a command chosen by the developer, like in Chat Spam.
+```
+
+To configure AutoMod, navigate to ``Basic Moderation Tools 2.0`` and scroll down to ``AutoMod``. There you will see the available and stable features that AutoMod can do. The configuration for each of the AutoMod features should look the same, listed below:
+
+```
+Enabled - Is the AutoMod feature enabled
+NotifyStaff - Should AutoMod notify staff when a player gets flagged
+LogInConsole - Should AutoMod log what happens in the console
+AutoPunish > Enabled - Should AutoMod automatically take action without an admins intervention
+AutoPunish > PunishmentType - The type of punishment that AutoMod should execute, listed below
+```
+
+As said above, if you are using AutoPunish, there is a field called ``PunishmentType``. You can choose out of these five actions, listed below:
+
+```
+'kick' - Kicks the player with a reason
+'mute' - Mute the player, making them unable to Chat
+'ban' - Ban the player from the game (30-day ban) with a reason
+'pban' - PBan the player from the game with a reason
+'custom' - Use the AutoMod API to make a custom punishment, explained in the next article
+```
+
+> When typing the ``PunishmentType``, please ensure that you type it in all lowercase, otherwise AutoMod will not be able to execute the punishment.
+
+Happy tinkering with AutoMod!
+
+# AutoMod: Creating a Custom Punishment
+
+AutoMod has an API that allows it to execute custom punishments. This article will show you how to correctly use this API.
+
+To get started, navigate to ``Basic Moderation Tools 2.0`` and scroll to ``AutoMod`` and ensure that whatever punishment you pick to use a custom punishment has in the ``PunishmentType``: 'custom', otherwise this will not work.
+
+Next, navigate to ``Basic Moderation Tools 2.0 > Custom Scripts > AutoMod > CustomPunishment``. Open this file. You should see various functions with 'AutoMod' as the variable, and the punishment type that you put as the name of the function (e.g. AutoMod:PunishmentFlag). You don't need to worry about the other functions, those are for the other punishments that also have this API enabled in them.
+
+Navigate to the AutoMod flag type, you should see something like this (This is the SpamFlag function):
+
+```lua
+function AutoMod:SpamFlag(plr)
+   if bmtAPI:IsTargetInGame(plr) then
+      print(plr.Name.." is spamming the chat (AUTOMOD CUSTOM)")
+   end
+end
+```
+Above is the stock code that is in the function, when the SpamFlag is triggered by a player and the AutoMod PunishmentType is set to 'custom', it will fire this function and will print ``(plr) is spamming the chat (AUTOMOD CUSTOM)``
+
+Your ready to start creating your custom punishment for the Flag type! Now, the AutoMod API gives you access to the player object, allowing you to control/punish the player as you want. APIv3 is also available for you to create your custom punishment in this script, named ``bmtAPI``. An example of a custom punishment that you could make is resetting the player. If the AutoMod Flag is triggered, it will reset the player. The code is shown below for ``SpamFlag``:
+
+```lua
+function AutoMod:SpamFlag(plr)
+   if bmtAPI:IsTargetInGame(plr) then
+       bmtAPI:Reset(plr)
+   end
+end
+```
+
+This code uses the APIv3 ``:Reset()`` function to reset the player when they spam in the Chat.
+
+That's it! You've successfully learnt how to use the AutoMod API to create a custom punishment that executes when a player gets Flagged!
+
 # Custom Commands
 
 To get started creating a custom command, open up ``Basic Moderation Tools 2.0`` and scroll to the bottom, where it says ``CustomCommands``.
@@ -97,14 +163,121 @@ return bmtExecute
 ```
 That's it! You've successfully created a custom command using the CustomCommands API!
 
-# Using APIv3 inside Custom Scripts
+# Getting Started with APIv3
 
-Do you want to be able to use BMT2.4's API to execute it's commands? BMT2.4 comes with an API that your custom scripts can use simply by loading the API module.
+Do you want to be able to use BMT2.4's API to execute it's commands? Well, you in luck! BMT2.4 comes with an API that your custom scripts can use simply by loading the API module (Anyone of your scripts can have access to all of the BMT API by completing this tutorial).
 You can load APIv3 with this line of code:
 ```lua
 local bmtAPI = require(game.ServerScriptService["Basic Moderation Tools 2.0"]["BasicMod Scripts"]["BasicMod V3 API"])
 ```
-After loading the API, you can use these functions to execute various BMT2.4 commands in any script you want:
+After loading the API, you can use all of BMT's functions to execute BMT2.4 commands in any script you want. A full documentation for all of APIv3's functions can be found in the next article.
+
+> The examples below don't have the ``bmtAPI`` variable, which ``requires()`` the API. You need to have the variable in order to use the API.
+
+# APIv3: WhitelistCheck()
+
+Function: ``WhitelistCheck(plr)`` <br>
+Purpose: Checks if a player is in the whitelist table, if not it kicks them from the server. This is a ``BMT MainModule Function`` and isn't really intended to be used in Custom Scripts <br>
+
+# APIv3: GetAdminLevel()
+
+Function: ``:GetAdminLevel(plr)``<br>
+Purpose: Returns the admin level of a player (Moderator, Administrator, etc .. )
+
+Example:
+
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   local adminRank = bmtAPI:GetAdminLevel(plr)
+   print(plr.Name.."'s admin rank is "..adminRank)
+end)
+```
+
+# APIv3: GetAdminType(plr)
+
+Function: ``:GetAdminType(plr)`` <br>
+Purpose: Returns the admin level number of a player (1, 2, 3, etc .. )
+
+Example:
+
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   local adminRankNumber = bmtAPI:GetAdminType(plr)
+   print(plr.Name.."'s admin rank number is "..adminRankNumber)
+end)
+```
+
+# APIv3: GetGameOwner()
+
+Function: ``:GetGameOwner(plr)``<br>
+Purpose: Returns true or false on if a player is the game owner
+
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   local isGameOwner = bmtAPI:GetGameOwner(plr)
+   if isGameOwner then
+      print(plr.Name.." is the game owner!")
+   else
+      print(plr.Name.." isn't the game owner!")
+   end
+end)
+```
+
+# APIv3: BlacklistCheck()
+
+Function: ``:BlacklistCheck(plr)`` <br>
+Purpose: Checks whether a player is in the blacklist table. If so, it kicks them. This is a ``BMT MainModule Function`` and isn't really intended to be used in Custom Scripts
+
+# APIv3: Kick()
+Function: ``:Kick(plr, reason, admin)`` <br>
+Purpose: Kicks a player with the kick message displaying the reason, admin, and an optional reason
+
+Example:
+```lua
+local PersonToKick = "ReallyBadPerson"
+
+game.Players.PlayerAdded:Connect(function(plr)
+   if plr.Name == PersonToKick then
+      bmtAPI:Kick(plr, "You are a bad person!", "Server")
+   end
+end)
+```
+
+# APIv3: ConsoleLog()
+
+Function: ``:ConsoleLog(message)`` <br>
+Purpose: Prints a message in the console, BMT style
+
+Example:
+```lua
+game.Players.PlayerAdded:Connect(function(plr)
+   bmtAPI:ConsoleLog("Hello, "..plr.Name)
+end)
+```
+
+# APIv3: NotifyStaff()
+
+> This API Function is currently not released and can only be used in Unstable Versions of BMT
+
+Function: ``:NotifyStaff(message)`` <br>
+Purpose: Notifies Moderator+ in the game using an announcement that displays a message
+
+Example:
+```lua
+local badPerson = "AReallyBadPerson"
+
+game.Players.PlayerAdded:Connect(function(plr)
+   if plr.Name == badPerson then
+      bmtAPI:NotifyStaff("A really bad person joined the game!")
+   end
+end)
+```
+
+# APIv3: IsTargetInGame()
+
+Function: ``:IsTargetInGame(plr)`` <br>
+Purpose: Returns true of false if the player specified is in the game. This is a ``BMT MainModule Function`` and isn't really intended to be used in Custom Scripts
+
 ```lua
 :WhitelistCheck(plr) -- Checks if a player is in the whitelist table
 :GetAdminLevel(plr) -- Returns the admin level of a player (Moderator, Administrator, etc .. )

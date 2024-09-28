@@ -635,7 +635,7 @@ end)
 
 > This function is being deprecated in favour of ``:IsSlocked()``
 
-Function: ``:CheckSlock(plr)``
+Function: ``:CheckSlock(plr)`` <br>
 Purpose: Checks if the server is locked, if so than it kicks the specified player. This is a ``BMT MainModule Function`` and isn't really intended to be used in Custom Scripts
 
 # APIv3: IsSlocked()

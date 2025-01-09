@@ -1,3 +1,4 @@
+> Basic Moderation Tools has been discontinued
 # Introduction
 
 Basic Moderation Tools (2.4) is a fully open source admin module, currently containing 38 executable in-game commands. It features admin heirachies, Custom Command Integration, Flexible Command Configuration, Donor Commands, Command Logging, and a API (APIv3) that can be loaded in a custom script and use all of Basic Moderation Tools' functions.
